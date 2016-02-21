@@ -1,0 +1,52 @@
+The files in this folder are the reasonable minimum 
+set of files needed to compile bare metal C applications
+for the STM32F401xE Microcontrollers. Most of them have
+been taken from example projects provided by ST, some of 
+them have been written from scratch for this purpose.
+
+
+Files provided by ARM Ltd.
+==========================
+arm_common_tables.h
+arm_const_structs.h
+arm_math.h
+core_cm4.h
+core_cm4_simd.h
+core_cmFunc.h
+core_cmInstr.h
+
+These files are part of every Cortex-M4 project, they contain
+all needed declarations and definitions to interact with the
+ARM-core, they are the same for all manufacturers.
+
+
+Files provided by STMicroelectronics
+====================================
+stm32f401xe.h
+stm32f4xx.h
+
+These are device specific and contain all declarations and
+definitions needed to access the peripherals in this particular
+device, most of it are structures and addresses of all peripheral 
+device registers mentioned in the reference manual.
+
+
+Files written from scratch
+==========================
+gcc_linker.ld
+gcc_startup_system.c
+
+These files are provided by the author of this example project.
+They have been written from scratch to provide the smallest
+possible (or reasonable) staring point.
+
+The linker script (*.ld) defines the memory layout and where to 
+place the various sections produced by the linker. It is very
+minimal and defines only the sections needed for bare metal C
+but can later be expanded or replaced by something more elaborate
+
+The startup_system file contains the vector table, the startup 
+code and all needed initialization that is executed before finally 
+entering main(). This part is often split into separate files, 
+partially written in assembly, but in this example everything is 
+implemented in C and has been put into one file for simplicity.
