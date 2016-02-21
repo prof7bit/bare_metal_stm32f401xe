@@ -71,9 +71,22 @@ all: $(BIN_NAME).hex
 all: $(BIN_NAME).lst
 all: print_size
 
+
 .PHONY: clean
 clean:
 	$(RM) -r $(wildcard $(BUILDDIR)*)
+
+
+.PHONY: install
+install: $(BIN_NAME).hex
+	@echo;
+	@echo [OpenOCD] program $<:
+	openocd -d0 \
+	-f board/st_nucleo_f4.cfg \
+ 	-c "program $<" \
+ 	-c "reset run" \
+ 	-c "shutdown"
+	
 
 ###########################################
 # Internal Rules                          #
