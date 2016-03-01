@@ -113,7 +113,7 @@ $(BUILDDIR)%.o: %.s
 $(BUILDDIR)%.elf: $(OBJS)
 	@echo;
 	@echo [LD] $@:
-	$(CC) -o $@ $^ $(CFLAGS) $(LFLAGS)
+	$(CC) -o $@ $^ $(CFLAGS) $(LFLAGS) -Wl,-Map=$(addsuffix .map, $(basename $@))
 
 %.bin: %.elf
 	@echo;

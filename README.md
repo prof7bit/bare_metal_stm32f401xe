@@ -9,11 +9,11 @@ ARM but only those for the core and peripheral
 registers, none of the HAL or any other optional
 libs.
 
-The startup code and the linker script have been
-implemented from scratch and without the Atollic
-copyright, the startup code and the SystemInit
-have been implemented in plain C and are in the
-file gcc_startup_system.c.
+The startup code has been implemented from scratch 
+and without the Atollic copyright, the startup code 
+and the SystemInit have been implemented in plain C 
+and are in the file gcc_startup_system.c.
+
 
 # Usage
 

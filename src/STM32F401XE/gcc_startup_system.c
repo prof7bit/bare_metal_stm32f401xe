@@ -20,7 +20,7 @@ extern long __bss_end__[];
 extern long __etext[];
 extern long __data_start__[];
 extern long __data_end__[];
-extern long _estack[];
+extern long __stack[];
 
 
 /*
@@ -291,7 +291,7 @@ typedef struct {
  * in the linker script to be at that exact memory address.
  */
 SECT_VECTABLE const vector_table_t __vector_table = {
-    .initial_stack = _estack,
+    .initial_stack = __stack,
     .vectors = {
         /*
          * Exception handlers that belong to the ARM core itself

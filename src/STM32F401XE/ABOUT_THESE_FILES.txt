@@ -31,22 +31,22 @@ device, most of it are structures and addresses of all peripheral
 device registers mentioned in the reference manual.
 
 
+Files provided by GCC
+=====================
+gcc_linker.ld
+
+This is almost the original version from the gcc samples folder,
+the only difference is the block with the memory ranges near the
+top of the file, ranges have been adjusted for this controller. 
+
+
 Files written from scratch
 ==========================
-gcc_linker.ld
 gcc_startup_system.c
 
-These files are provided by the author of this example project.
-They have been written from scratch to provide the smallest
-possible (or reasonable) staring point.
-
-The linker script (*.ld) defines the memory layout and where to 
-place the various sections produced by the linker. It is very
-minimal and defines only the sections needed for bare metal C
-but can later be expanded or replaced by something more elaborate
-
-The startup_system file contains the vector table, the startup 
-code and all needed initialization that is executed before finally 
-entering main(). This part is often split into separate files, 
-partially written in assembly, but in this example everything is 
-implemented in C and has been put into one file for simplicity.
+This file is provided by the author of this example project.
+It contains the vector table, the startup code and all needed 
+initialization that is executed before finally entering main(). 
+This part is often split into separate files, partially written 
+in assembly, but in this example everything is implemented in C 
+and has been put into one file for simplicity.
