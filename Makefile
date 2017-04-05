@@ -27,6 +27,7 @@ CFLAGS   += -ggdb
 
 ifdef DEBUG
     CFLAGS   += -Og
+    CFLAGS   += -g3
 else
     CFLAGS   += -Os -flto
 endif
