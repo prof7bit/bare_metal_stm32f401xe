@@ -99,46 +99,30 @@ $(OBJDIR):
 
 # compiler
 $(BUILDDIR)%.o: %.c
-	@echo;
-	@echo [CC] $<:
 	$(CC) -MMD -c -o $@ $(INCLUDE) $(DEFINES) $(CFLAGS) $(WFLAGS) $<
 
 # assembler
 $(BUILDDIR)%.o: %.s
-	@echo;
-	@echo [AS] $<:
 	$(CC) -c -x assembler-with-cpp -o $@ $(INCLUDE) $(DEFINES) $(CFLAGS) $(WFLAGS) $<
 
 # linker
 $(BUILDDIR)%.elf: $(OBJS)
-	@echo;
-	@echo [LD] $@:
 	$(CC) -o $@ $^ $(CFLAGS) $(LFLAGS) -Wl,-Map=$(addsuffix .map, $(basename $@))
 
 %.bin: %.elf
-	@echo;
-	@echo [objcopy] $@:
 	$(OBJCOPY) -O binary -S $< $@
 
 %.s19: %.elf
-	@echo;
-	@echo [objcopy] $@:
 	$(OBJCOPY) -O srec -S $< $@
 
 %.hex: %.elf
-	@echo;
-	@echo [objcopy] $@:
 	$(OBJCOPY) -O ihex -S $< $@
 
 %.lst: %.elf
-	@echo;
-	@echo [objdump] $@:
 	$(OBJDUMP) -D $< > $@
 
 .PHONY: print_size
 print_size: $(BIN_NAME).elf
-	@echo;
-	@echo [SIZE] $<:
 	$(SIZE) $<
 
 
