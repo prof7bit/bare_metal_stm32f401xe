@@ -152,11 +152,12 @@ WEAK void SystemCoreClockUpdate(void) {
 
 
 /**
- * This is the entry point right after reset. The address of this
- * function will be placed in the vector table as the reset handler
- * so code execution after reset will begin exactly here.
+ * Initialize bss section with zero (C standard guarantees that global
+ * and static variables will be initialized with zero) and initialize
+ * the data section (initialized variables) with the data found in the
+ * flash after the end of the text section.
  */
-NAKED void Reset_Handler(void) {
+static void ram_init(void) {
     for (long* dest = __bss_start__; dest < __bss_end__; ++dest) {
         *dest = 0;
     }
@@ -165,20 +166,28 @@ NAKED void Reset_Handler(void) {
     for (long* dest = __data_start__; dest < __data_end__; ++dest) {
         *dest = *src++;
     }
+}
 
-    SystemInit();
 
-    /**
-     * Call main() but call it indirectly to prevent
-     * function inlining. If we would just call main()
-     * the usual way it might sometimes work but the
-     * link time optimizer which can be quite aggressive
-     * sometimes might try to convert the entire main()
-     * into an inline function and this is absolutely
-     * not what we want here.
-     */
-    int(* volatile __main__)(void) = main;
-    __main__();
+/**
+ * This is the entry point right after reset. The address of this
+ * function will be placed in the vector table as the reset handler
+ * so code execution after reset will begin exactly here.
+ *
+ * It is implemented in asm because this is the only reliable way
+ * to have a naked function without a stack frame and at the same
+ * time make sure the optimizer will not try to inline anything
+ * into it.
+ *
+ * The function will end in an infinite loop should the main()
+ * function ever return (which would be an error because main()
+ * must never return).
+ */
+NAKED void Reset_Handler(void) {
+    asm("bl  ram_init"           :: "i" (ram_init));
+    asm("bl  SystemInit"         :: "i" (SystemInit));
+    asm("bl  main"               :: "i" (main));
+    while(1);
 }
 
 
