@@ -130,12 +130,42 @@ print_size: $(BIN_NAME).elf
 ## Advanced Voodoo ##
 #####################
 
-# try to include any compiler generated dependency makefile snippet *.d
-# that might exist in BUILDDIR (but don't complain if it doesn't yet).
+# Force a rebuild of affected .c files when a header file is changed.
+#
+# The compiler can generate small files containing Makefile rules that
+# make every c file dependent on all its included header files. 
+# Including these auto-generated rules will ensure that any change in 
+# a header file will also invalidate all c files that depend on it and
+# force a rebuild. The following commands will try to include any such
+# compiler generated makefile snippet (they have the extension *.d)
+# and the minus in front of the include makes sure it won't produce 
+# an error if they do not yet exist (for example after clean).
 DEPS = $(patsubst %.o,%.d,$(OBJS))
 -include $(DEPS)
 
-# make the object files also depend on the makefile itself
+# Force a rebuild of everything when the Makefile itself is changed.
+#  
+# Just adding the Makefile as prerequisite to all object files is
+# enough to accomplish this. 
 $(OBJS): Makefile
 
-
+# Force a rebuild of everything when the compiler flags have changed.
+#
+# On the obscurity scale from 0 to 10 the following Voodoo 
+# will reach a solid 8 but it is very strong and it is useful
+# enough to use it despite its WTF-factor.
+#  
+# The phony force prerequisite just makes sure the recipe is always 
+# executed, even when the compiler_flags file already exists,
+# thats is its only purpose. When the recipe is executed (on every 
+# build because of the phony dependency) it compares the *contents* 
+# of the compiler_flags file and then it might or might not update 
+# the compiler_flags file depending on the current flags. 
+# The object files will be made depending on the compiler_flags
+# file and when its timestamp is newer then they will be rebuilt 
+# also.
+ALLFLAGS=$(INCLUDE) $(DEFINES) $(CFLAGS) $(WFLAGS)
+.PHONY: force
+$(BUILDDIR)compiler_flags: force
+	echo '$(ALLFLAGS)' | cmp -s - $@ || echo '$(ALLFLAGS)' > $@
+$(OBJS): $(BUILDDIR)compiler_flags
