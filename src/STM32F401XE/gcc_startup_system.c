@@ -4,7 +4,7 @@
  * for STM32F401Xe
  *
  * (c) 2016 Bernd Kreuss <prof7bit@gmail.com>
- * This file is public domain, you may use it, modify 
+ * This file is public domain, you may use it, modify
  * it or reproduce it for whatever purpose you want.
  */
 
@@ -60,7 +60,7 @@ uint32_t SystemCoreClock;
 WEAK void SystemInit(void) {
     /* Enable Power Control clock */
     RCC->APB1ENR |= RCC_APB1LPENR_PWRLPEN;
-    
+
     /* Regulator voltage scaling output selection: Scale 2 */
     PWR->CR |= PWR_CR_VOS_1;
 
@@ -72,7 +72,7 @@ WEAK void SystemInit(void) {
 
     /* Disable main PLL */
     RCC->CR &= ~(RCC_CR_PLLON);
-    
+
     /* Wait until PLL ready (disabled) */
     while ((RCC->CR & RCC_CR_PLLRDY) != 0);
 
@@ -86,7 +86,7 @@ WEAK void SystemInit(void) {
      * PLLN = 336
      * PLLP = 4
      * PLLQ = 7
-     * 
+     *
      * Please see the reference manual for the meaning of the
      * bits and the mapping between the above numbers and the
      * actual values written to the PLLCFGR register.
@@ -99,7 +99,7 @@ WEAK void SystemInit(void) {
 
     /* PLL On */
     RCC->CR |= RCC_CR_PLLON;
-    
+
     /* Wait until PLL is locked */
     while ((RCC->CR & RCC_CR_PLLRDY) == 0);
 
@@ -109,8 +109,8 @@ WEAK void SystemInit(void) {
      * enable prefetch
      * set latency to 2WS (3 CPU cycles)
      */
-    FLASH->ACR |= FLASH_ACR_ICEN 
-                | FLASH_ACR_PRFTEN 
+    FLASH->ACR |= FLASH_ACR_ICEN
+                | FLASH_ACR_PRFTEN
                 | FLASH_ACR_LATENCY_2WS;
 
     /* Set clock source to PLL */
@@ -222,62 +222,62 @@ WEAK_DEFAULT void SVC_Handler(void);
 WEAK_DEFAULT void DebugMon_Handler(void);
 WEAK_DEFAULT void PendSV_Handler(void);
 WEAK_DEFAULT void SysTick_Handler(void);
-WEAK_DEFAULT void WWDG_IRQHandler(void);                    /* Window WatchDog              */                                        
-WEAK_DEFAULT void PVD_IRQHandler(void);                     /* PVD through EXTI Line detection */                        
-WEAK_DEFAULT void TAMP_STAMP_IRQHandler(void);              /* Tamper and TimeStamps through the EXTI line */            
-WEAK_DEFAULT void RTC_WKUP_IRQHandler(void);                /* RTC Wakeup through the EXTI line */                      
-WEAK_DEFAULT void FLASH_IRQHandler(void);                   /* FLASH                        */                                          
-WEAK_DEFAULT void RCC_IRQHandler(void);                     /* RCC                          */                                            
-WEAK_DEFAULT void EXTI0_IRQHandler(void);                   /* EXTI Line0                   */                        
-WEAK_DEFAULT void EXTI1_IRQHandler(void);                   /* EXTI Line1                   */                          
-WEAK_DEFAULT void EXTI2_IRQHandler(void);                   /* EXTI Line2                   */                          
-WEAK_DEFAULT void EXTI3_IRQHandler(void);                   /* EXTI Line3                   */                          
-WEAK_DEFAULT void EXTI4_IRQHandler(void);                   /* EXTI Line4                   */                          
-WEAK_DEFAULT void DMA1_Stream0_IRQHandler(void);            /* DMA1 Stream 0                */                  
-WEAK_DEFAULT void DMA1_Stream1_IRQHandler(void);            /* DMA1 Stream 1                */                   
-WEAK_DEFAULT void DMA1_Stream2_IRQHandler(void);            /* DMA1 Stream 2                */                   
-WEAK_DEFAULT void DMA1_Stream3_IRQHandler(void);            /* DMA1 Stream 3                */                   
-WEAK_DEFAULT void DMA1_Stream4_IRQHandler(void);            /* DMA1 Stream 4                */                   
-WEAK_DEFAULT void DMA1_Stream5_IRQHandler(void);            /* DMA1 Stream 5                */                   
-WEAK_DEFAULT void DMA1_Stream6_IRQHandler(void);            /* DMA1 Stream 6                */                   
-WEAK_DEFAULT void ADC_IRQHandler(void);                     /* ADC1(void); ADC2 and ADC3s   */                   
-WEAK_DEFAULT void EXTI9_5_IRQHandler(void);                 /* External Line[9:5]s          */                          
-WEAK_DEFAULT void TIM1_BRK_TIM9_IRQHandler(void);           /* TIM1 Break and TIM9          */         
-WEAK_DEFAULT void TIM1_UP_TIM10_IRQHandler(void);           /* TIM1 Update and TIM10        */         
+WEAK_DEFAULT void WWDG_IRQHandler(void);                    /* Window WatchDog              */
+WEAK_DEFAULT void PVD_IRQHandler(void);                     /* PVD through EXTI Line detection */
+WEAK_DEFAULT void TAMP_STAMP_IRQHandler(void);              /* Tamper and TimeStamps through the EXTI line */
+WEAK_DEFAULT void RTC_WKUP_IRQHandler(void);                /* RTC Wakeup through the EXTI line */
+WEAK_DEFAULT void FLASH_IRQHandler(void);                   /* FLASH                        */
+WEAK_DEFAULT void RCC_IRQHandler(void);                     /* RCC                          */
+WEAK_DEFAULT void EXTI0_IRQHandler(void);                   /* EXTI Line0                   */
+WEAK_DEFAULT void EXTI1_IRQHandler(void);                   /* EXTI Line1                   */
+WEAK_DEFAULT void EXTI2_IRQHandler(void);                   /* EXTI Line2                   */
+WEAK_DEFAULT void EXTI3_IRQHandler(void);                   /* EXTI Line3                   */
+WEAK_DEFAULT void EXTI4_IRQHandler(void);                   /* EXTI Line4                   */
+WEAK_DEFAULT void DMA1_Stream0_IRQHandler(void);            /* DMA1 Stream 0                */
+WEAK_DEFAULT void DMA1_Stream1_IRQHandler(void);            /* DMA1 Stream 1                */
+WEAK_DEFAULT void DMA1_Stream2_IRQHandler(void);            /* DMA1 Stream 2                */
+WEAK_DEFAULT void DMA1_Stream3_IRQHandler(void);            /* DMA1 Stream 3                */
+WEAK_DEFAULT void DMA1_Stream4_IRQHandler(void);            /* DMA1 Stream 4                */
+WEAK_DEFAULT void DMA1_Stream5_IRQHandler(void);            /* DMA1 Stream 5                */
+WEAK_DEFAULT void DMA1_Stream6_IRQHandler(void);            /* DMA1 Stream 6                */
+WEAK_DEFAULT void ADC_IRQHandler(void);                     /* ADC1(void); ADC2 and ADC3s   */
+WEAK_DEFAULT void EXTI9_5_IRQHandler(void);                 /* External Line[9:5]s          */
+WEAK_DEFAULT void TIM1_BRK_TIM9_IRQHandler(void);           /* TIM1 Break and TIM9          */
+WEAK_DEFAULT void TIM1_UP_TIM10_IRQHandler(void);           /* TIM1 Update and TIM10        */
 WEAK_DEFAULT void TIM1_TRG_COM_TIM11_IRQHandler(void);      /* TIM1 Trigger and Commutation and TIM11 */
-WEAK_DEFAULT void TIM1_CC_IRQHandler(void);                 /* TIM1 Capture Compare         */                          
-WEAK_DEFAULT void TIM2_IRQHandler(void);                    /* TIM2                         */                   
-WEAK_DEFAULT void TIM3_IRQHandler(void);                    /* TIM3                         */                   
-WEAK_DEFAULT void TIM4_IRQHandler(void);                    /* TIM4                         */                   
-WEAK_DEFAULT void I2C1_EV_IRQHandler(void);                 /* I2C1 Event                   */                          
-WEAK_DEFAULT void I2C1_ER_IRQHandler(void);                 /* I2C1 Error                   */                          
-WEAK_DEFAULT void I2C2_EV_IRQHandler(void);                 /* I2C2 Event                   */                          
-WEAK_DEFAULT void I2C2_ER_IRQHandler(void);                 /* I2C2 Error                   */                            
-WEAK_DEFAULT void SPI1_IRQHandler(void);                    /* SPI1                         */                   
-WEAK_DEFAULT void SPI2_IRQHandler(void);                    /* SPI2                         */                   
-WEAK_DEFAULT void USART1_IRQHandler(void);                  /* USART1                       */                   
-WEAK_DEFAULT void USART2_IRQHandler(void);                  /* USART2                       */                   
-WEAK_DEFAULT void EXTI15_10_IRQHandler(void);               /* External Line[15:10]s        */                          
-WEAK_DEFAULT void RTC_Alarm_IRQHandler(void);               /* RTC Alarm (A and B) through EXTI Line */                 
-WEAK_DEFAULT void OTG_FS_WKUP_IRQHandler(void);             /* USB OTG FS Wakeup through EXTI line */                       
-WEAK_DEFAULT void DMA1_Stream7_IRQHandler(void);            /* DMA1 Stream7                 */                          
-WEAK_DEFAULT void SDIO_IRQHandler(void);                    /* SDIO                         */                   
-WEAK_DEFAULT void TIM5_IRQHandler(void);                    /* TIM5                         */                   
-WEAK_DEFAULT void SPI3_IRQHandler(void);                    /* SPI3                         */                   
-WEAK_DEFAULT void DMA2_Stream0_IRQHandler(void);            /* DMA2 Stream 0                */                   
-WEAK_DEFAULT void DMA2_Stream1_IRQHandler(void);            /* DMA2 Stream 1                */                   
-WEAK_DEFAULT void DMA2_Stream2_IRQHandler(void);            /* DMA2 Stream 2                */                   
-WEAK_DEFAULT void DMA2_Stream3_IRQHandler(void);            /* DMA2 Stream 3                */                   
-WEAK_DEFAULT void DMA2_Stream4_IRQHandler(void);            /* DMA2 Stream 4                */                   
-WEAK_DEFAULT void OTG_FS_IRQHandler(void);                  /* USB OTG FS                   */                   
-WEAK_DEFAULT void DMA2_Stream5_IRQHandler(void);            /* DMA2 Stream 5                */                   
-WEAK_DEFAULT void DMA2_Stream6_IRQHandler(void);            /* DMA2 Stream 6                */                   
-WEAK_DEFAULT void DMA2_Stream7_IRQHandler(void);            /* DMA2 Stream 7                */                   
-WEAK_DEFAULT void USART6_IRQHandler(void);                  /* USART6                       */                    
-WEAK_DEFAULT void I2C3_EV_IRQHandler(void);                 /* I2C3 event                   */                          
-WEAK_DEFAULT void I2C3_ER_IRQHandler(void);                 /* I2C3 error                   */                          
+WEAK_DEFAULT void TIM1_CC_IRQHandler(void);                 /* TIM1 Capture Compare         */
+WEAK_DEFAULT void TIM2_IRQHandler(void);                    /* TIM2                         */
+WEAK_DEFAULT void TIM3_IRQHandler(void);                    /* TIM3                         */
+WEAK_DEFAULT void TIM4_IRQHandler(void);                    /* TIM4                         */
+WEAK_DEFAULT void I2C1_EV_IRQHandler(void);                 /* I2C1 Event                   */
+WEAK_DEFAULT void I2C1_ER_IRQHandler(void);                 /* I2C1 Error                   */
+WEAK_DEFAULT void I2C2_EV_IRQHandler(void);                 /* I2C2 Event                   */
+WEAK_DEFAULT void I2C2_ER_IRQHandler(void);                 /* I2C2 Error                   */
+WEAK_DEFAULT void SPI1_IRQHandler(void);                    /* SPI1                         */
+WEAK_DEFAULT void SPI2_IRQHandler(void);                    /* SPI2                         */
+WEAK_DEFAULT void USART1_IRQHandler(void);                  /* USART1                       */
+WEAK_DEFAULT void USART2_IRQHandler(void);                  /* USART2                       */
+WEAK_DEFAULT void EXTI15_10_IRQHandler(void);               /* External Line[15:10]s        */
+WEAK_DEFAULT void RTC_Alarm_IRQHandler(void);               /* RTC Alarm (A and B) through EXTI Line */
+WEAK_DEFAULT void OTG_FS_WKUP_IRQHandler(void);             /* USB OTG FS Wakeup through EXTI line */
+WEAK_DEFAULT void DMA1_Stream7_IRQHandler(void);            /* DMA1 Stream7                 */
+WEAK_DEFAULT void SDIO_IRQHandler(void);                    /* SDIO                         */
+WEAK_DEFAULT void TIM5_IRQHandler(void);                    /* TIM5                         */
+WEAK_DEFAULT void SPI3_IRQHandler(void);                    /* SPI3                         */
+WEAK_DEFAULT void DMA2_Stream0_IRQHandler(void);            /* DMA2 Stream 0                */
+WEAK_DEFAULT void DMA2_Stream1_IRQHandler(void);            /* DMA2 Stream 1                */
+WEAK_DEFAULT void DMA2_Stream2_IRQHandler(void);            /* DMA2 Stream 2                */
+WEAK_DEFAULT void DMA2_Stream3_IRQHandler(void);            /* DMA2 Stream 3                */
+WEAK_DEFAULT void DMA2_Stream4_IRQHandler(void);            /* DMA2 Stream 4                */
+WEAK_DEFAULT void OTG_FS_IRQHandler(void);                  /* USB OTG FS                   */
+WEAK_DEFAULT void DMA2_Stream5_IRQHandler(void);            /* DMA2 Stream 5                */
+WEAK_DEFAULT void DMA2_Stream6_IRQHandler(void);            /* DMA2 Stream 6                */
+WEAK_DEFAULT void DMA2_Stream7_IRQHandler(void);            /* DMA2 Stream 7                */
+WEAK_DEFAULT void USART6_IRQHandler(void);                  /* USART6                       */
+WEAK_DEFAULT void I2C3_EV_IRQHandler(void);                 /* I2C3 event                   */
+WEAK_DEFAULT void I2C3_ER_IRQHandler(void);                 /* I2C3 error                   */
 WEAK_DEFAULT void FPU_IRQHandler(void);                     /* FPU                          */
-WEAK_DEFAULT void SPI4_IRQHandler(void);                    /* SPI4                         */         
+WEAK_DEFAULT void SPI4_IRQHandler(void);                    /* SPI4                         */
 
 
 /**
@@ -320,93 +320,93 @@ SECT_VECTABLE const vector_table_t __vector_table = {
         0,
         PendSV_Handler,
         SysTick_Handler,
-        
+
         /* External Interrupts */
-        WWDG_IRQHandler,                    /* Window WatchDog              */                                        
-        PVD_IRQHandler,                     /* PVD through EXTI Line detection */                        
-        TAMP_STAMP_IRQHandler,              /* Tamper and TimeStamps through the EXTI line */            
-        RTC_WKUP_IRQHandler,                /* RTC Wakeup through the EXTI line */                      
-        FLASH_IRQHandler,                   /* FLASH                        */                                          
-        RCC_IRQHandler,                     /* RCC                          */                                            
-        EXTI0_IRQHandler,                   /* EXTI Line0                   */                        
-        EXTI1_IRQHandler,                   /* EXTI Line1                   */                          
-        EXTI2_IRQHandler,                   /* EXTI Line2                   */                          
-        EXTI3_IRQHandler,                   /* EXTI Line3                   */                          
-        EXTI4_IRQHandler,                   /* EXTI Line4                   */                          
-        DMA1_Stream0_IRQHandler,            /* DMA1 Stream 0                */                  
-        DMA1_Stream1_IRQHandler,            /* DMA1 Stream 1                */                   
-        DMA1_Stream2_IRQHandler,            /* DMA1 Stream 2                */                   
-        DMA1_Stream3_IRQHandler,            /* DMA1 Stream 3                */                   
-        DMA1_Stream4_IRQHandler,            /* DMA1 Stream 4                */                   
-        DMA1_Stream5_IRQHandler,            /* DMA1 Stream 5                */                   
-        DMA1_Stream6_IRQHandler,            /* DMA1 Stream 6                */                   
-        ADC_IRQHandler,                     /* ADC1, ADC2 and ADC3s         */                   
-        0,                                  /* Reserved                     */                         
-        0,                                  /* Reserved                     */                          
-        0,                                  /* Reserved                     */                          
-        0,                                  /* Reserved                     */                          
-        EXTI9_5_IRQHandler,                 /* External Line[9:5]s          */                          
-        TIM1_BRK_TIM9_IRQHandler,           /* TIM1 Break and TIM9          */         
-        TIM1_UP_TIM10_IRQHandler,           /* TIM1 Update and TIM10        */         
+        WWDG_IRQHandler,                    /* Window WatchDog              */
+        PVD_IRQHandler,                     /* PVD through EXTI Line detection */
+        TAMP_STAMP_IRQHandler,              /* Tamper and TimeStamps through the EXTI line */
+        RTC_WKUP_IRQHandler,                /* RTC Wakeup through the EXTI line */
+        FLASH_IRQHandler,                   /* FLASH                        */
+        RCC_IRQHandler,                     /* RCC                          */
+        EXTI0_IRQHandler,                   /* EXTI Line0                   */
+        EXTI1_IRQHandler,                   /* EXTI Line1                   */
+        EXTI2_IRQHandler,                   /* EXTI Line2                   */
+        EXTI3_IRQHandler,                   /* EXTI Line3                   */
+        EXTI4_IRQHandler,                   /* EXTI Line4                   */
+        DMA1_Stream0_IRQHandler,            /* DMA1 Stream 0                */
+        DMA1_Stream1_IRQHandler,            /* DMA1 Stream 1                */
+        DMA1_Stream2_IRQHandler,            /* DMA1 Stream 2                */
+        DMA1_Stream3_IRQHandler,            /* DMA1 Stream 3                */
+        DMA1_Stream4_IRQHandler,            /* DMA1 Stream 4                */
+        DMA1_Stream5_IRQHandler,            /* DMA1 Stream 5                */
+        DMA1_Stream6_IRQHandler,            /* DMA1 Stream 6                */
+        ADC_IRQHandler,                     /* ADC1, ADC2 and ADC3s         */
+        0,                                  /* Reserved                     */
+        0,                                  /* Reserved                     */
+        0,                                  /* Reserved                     */
+        0,                                  /* Reserved                     */
+        EXTI9_5_IRQHandler,                 /* External Line[9:5]s          */
+        TIM1_BRK_TIM9_IRQHandler,           /* TIM1 Break and TIM9          */
+        TIM1_UP_TIM10_IRQHandler,           /* TIM1 Update and TIM10        */
         TIM1_TRG_COM_TIM11_IRQHandler,      /* TIM1 Trigger and Commutation and TIM11 */
-        TIM1_CC_IRQHandler,                 /* TIM1 Capture Compare         */                          
-        TIM2_IRQHandler,                    /* TIM2                         */                   
-        TIM3_IRQHandler,                    /* TIM3                         */                   
-        TIM4_IRQHandler,                    /* TIM4                         */                   
-        I2C1_EV_IRQHandler,                 /* I2C1 Event                   */                          
-        I2C1_ER_IRQHandler,                 /* I2C1 Error                   */                          
-        I2C2_EV_IRQHandler,                 /* I2C2 Event                   */                          
-        I2C2_ER_IRQHandler,                 /* I2C2 Error                   */                            
-        SPI1_IRQHandler,                    /* SPI1                         */                   
-        SPI2_IRQHandler,                    /* SPI2                         */                   
-        USART1_IRQHandler,                  /* USART1                       */                   
-        USART2_IRQHandler,                  /* USART2                       */                   
-        0,                                  /* Reserved                     */                   
-        EXTI15_10_IRQHandler,               /* External Line[15:10]s        */                          
-        RTC_Alarm_IRQHandler,               /* RTC Alarm (A and B) through EXTI Line */                 
-        OTG_FS_WKUP_IRQHandler,             /* USB OTG FS Wakeup through EXTI line */                       
-        0,                                  /* Reserved                     */         
-        0,                                  /* Reserved                     */         
+        TIM1_CC_IRQHandler,                 /* TIM1 Capture Compare         */
+        TIM2_IRQHandler,                    /* TIM2                         */
+        TIM3_IRQHandler,                    /* TIM3                         */
+        TIM4_IRQHandler,                    /* TIM4                         */
+        I2C1_EV_IRQHandler,                 /* I2C1 Event                   */
+        I2C1_ER_IRQHandler,                 /* I2C1 Error                   */
+        I2C2_EV_IRQHandler,                 /* I2C2 Event                   */
+        I2C2_ER_IRQHandler,                 /* I2C2 Error                   */
+        SPI1_IRQHandler,                    /* SPI1                         */
+        SPI2_IRQHandler,                    /* SPI2                         */
+        USART1_IRQHandler,                  /* USART1                       */
+        USART2_IRQHandler,                  /* USART2                       */
         0,                                  /* Reserved                     */
-        0,                                  /* Reserved                     */                          
-        DMA1_Stream7_IRQHandler,            /* DMA1 Stream7                 */                          
-        0,                                  /* Reserved                     */                   
-        SDIO_IRQHandler,                    /* SDIO                         */                   
-        TIM5_IRQHandler,                    /* TIM5                         */                   
-        SPI3_IRQHandler,                    /* SPI3                         */                   
-        0,                                  /* Reserved                     */                   
-        0,                                  /* Reserved                     */                   
-        0,                                  /* Reserved                     */                   
+        EXTI15_10_IRQHandler,               /* External Line[15:10]s        */
+        RTC_Alarm_IRQHandler,               /* RTC Alarm (A and B) through EXTI Line */
+        OTG_FS_WKUP_IRQHandler,             /* USB OTG FS Wakeup through EXTI line */
         0,                                  /* Reserved                     */
-        DMA2_Stream0_IRQHandler,            /* DMA2 Stream 0                */                   
-        DMA2_Stream1_IRQHandler,            /* DMA2 Stream 1                */                   
-        DMA2_Stream2_IRQHandler,            /* DMA2 Stream 2                */                   
-        DMA2_Stream3_IRQHandler,            /* DMA2 Stream 3                */                   
-        DMA2_Stream4_IRQHandler,            /* DMA2 Stream 4                */                   
-        0,                                  /* Reserved                     */                   
-        0,                                  /* Reserved                     */                     
-        0,                                  /* Reserved                     */                          
-        0,                                  /* Reserved                     */                          
-        0,                                  /* Reserved                     */                          
-        0,                                  /* Reserved                     */                          
-        OTG_FS_IRQHandler,                  /* USB OTG FS                   */                   
-        DMA2_Stream5_IRQHandler,            /* DMA2 Stream 5                */                   
-        DMA2_Stream6_IRQHandler,            /* DMA2 Stream 6                */                   
-        DMA2_Stream7_IRQHandler,            /* DMA2 Stream 7                */                   
-        USART6_IRQHandler,                  /* USART6                       */                    
-        I2C3_EV_IRQHandler,                 /* I2C3 event                   */                          
-        I2C3_ER_IRQHandler,                 /* I2C3 error                   */                          
-        0,                                  /* Reserved                     */                   
-        0,                                  /* Reserved                     */                   
-        0,                                  /* Reserved                     */                         
-        0,                                  /* Reserved                     */                   
-        0,                                  /* Reserved                     */                   
-        0,                                  /* Reserved                     */                   
+        0,                                  /* Reserved                     */
+        0,                                  /* Reserved                     */
+        0,                                  /* Reserved                     */
+        DMA1_Stream7_IRQHandler,            /* DMA1 Stream7                 */
+        0,                                  /* Reserved                     */
+        SDIO_IRQHandler,                    /* SDIO                         */
+        TIM5_IRQHandler,                    /* TIM5                         */
+        SPI3_IRQHandler,                    /* SPI3                         */
+        0,                                  /* Reserved                     */
+        0,                                  /* Reserved                     */
+        0,                                  /* Reserved                     */
+        0,                                  /* Reserved                     */
+        DMA2_Stream0_IRQHandler,            /* DMA2 Stream 0                */
+        DMA2_Stream1_IRQHandler,            /* DMA2 Stream 1                */
+        DMA2_Stream2_IRQHandler,            /* DMA2 Stream 2                */
+        DMA2_Stream3_IRQHandler,            /* DMA2 Stream 3                */
+        DMA2_Stream4_IRQHandler,            /* DMA2 Stream 4                */
+        0,                                  /* Reserved                     */
+        0,                                  /* Reserved                     */
+        0,                                  /* Reserved                     */
+        0,                                  /* Reserved                     */
+        0,                                  /* Reserved                     */
+        0,                                  /* Reserved                     */
+        OTG_FS_IRQHandler,                  /* USB OTG FS                   */
+        DMA2_Stream5_IRQHandler,            /* DMA2 Stream 5                */
+        DMA2_Stream6_IRQHandler,            /* DMA2 Stream 6                */
+        DMA2_Stream7_IRQHandler,            /* DMA2 Stream 7                */
+        USART6_IRQHandler,                  /* USART6                       */
+        I2C3_EV_IRQHandler,                 /* I2C3 event                   */
+        I2C3_ER_IRQHandler,                 /* I2C3 error                   */
+        0,                                  /* Reserved                     */
+        0,                                  /* Reserved                     */
+        0,                                  /* Reserved                     */
+        0,                                  /* Reserved                     */
+        0,                                  /* Reserved                     */
+        0,                                  /* Reserved                     */
         0,                                  /* Reserved                     */
         FPU_IRQHandler,                     /* FPU                          */
-        0,                                  /* Reserved                     */                   
         0,                                  /* Reserved                     */
-        SPI4_IRQHandler                     /* SPI4                         */         
+        0,                                  /* Reserved                     */
+        SPI4_IRQHandler                     /* SPI4                         */
     }
 };
 
