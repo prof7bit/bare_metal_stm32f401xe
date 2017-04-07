@@ -46,17 +46,22 @@ int main(void) {
     while(1) {
 
         /*
-         * LED on
+         * LED on (drive the pin high)
+         * A GPIO output pin is set to high by writing 1 to the
+         * corresponding bit in the lower half of the BSRR register
          * -> see section 8.4.7 in the manual
          */
-        LED_GPIO->BSRRL = (1 << LED_PIN);
+        LED_GPIO->BSRR = (1 << LED_PIN);
 
         delay(200);
 
         /*
-         *  LED off
+         * LED off (drive the pin low)
+         * A GPIO output pin is set to low by writing 1 to the
+         * corresponding bit in the upper half of the BSRR register
+         * -> see section 8.4.7 in the manual
          */
-        LED_GPIO->BSRRH = (1 << LED_PIN);
+        LED_GPIO->BSRR = (1 << (LED_PIN + 16));
 
         delay(200);
     }
