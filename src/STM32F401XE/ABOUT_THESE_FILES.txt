@@ -7,13 +7,11 @@ them have been written from scratch for this purpose.
 
 Files provided by ARM Ltd.
 ==========================
-arm_common_tables.h
-arm_const_structs.h
-arm_math.h
+cmsis_gcc.h
 core_cm4.h
-core_cm4_simd.h
 core_cmFunc.h
 core_cmInstr.h
+core_cmSimd.h
 
 These files are part of every Cortex-M4 project, they contain
 all needed declarations and definitions to interact with the
@@ -23,7 +21,6 @@ ARM-core, they are the same for all manufacturers.
 Files provided by STMicroelectronics
 ====================================
 stm32f401xe.h
-stm32f4xx.h
 
 These are device specific and contain all declarations and
 definitions needed to access the peripherals in this particular
