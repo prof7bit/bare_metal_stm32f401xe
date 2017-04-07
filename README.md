@@ -9,9 +9,9 @@ ARM but only those for the core and peripheral
 registers, none of the HAL or any other optional
 libs.
 
-The startup code has been implemented from scratch 
-and without the Atollic copyright, the startup code 
-and the SystemInit have been implemented in plain C 
+The startup code has been implemented from scratch
+and without the Atollic copyright, the startup code
+and the SystemInit have been implemented in plain C
 and are in the file gcc_startup_system.c.
 
 
@@ -23,6 +23,8 @@ and are in the file gcc_startup_system.c.
 * get a NUCLEO-F401RE demo board from STMicroelectronics
 * install the official arm-none-eabi-gcc toolchain from Launchpad
 * install OpenOCD
+* add this line to your udev rules (permissions for the STLink on the NUCLEO board)<br/>
+  `ACTION=="add|change", ATTRS{idVendor}=="0483", ATTRS{idProduct}=="374b", MODE="664", GROUP="plugdev"`
 
 ## Build and run
 
@@ -32,4 +34,3 @@ and are in the file gcc_startup_system.c.
 * watch the green LED blink while studying the reference manual
 
 happy hacking :-)
-
