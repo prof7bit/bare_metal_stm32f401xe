@@ -10,9 +10,12 @@ registers, none of the HAL or any other optional
 libs.
 
 The startup code has been implemented from scratch
-and without the Atollic copyright, the startup code
-and the SystemInit have been implemented in plain C
-and are in the file gcc_startup_system.c.
+and the linker script has been taken from the gcc
+distribution and adapted for this controller and
+therefore none of these files have any Atollic
+copyright anymore. Startup code and SystemInit
+have been implemented in plain C and are together
+in one file gcc_startup_system.c.
 
 
 # Usage
