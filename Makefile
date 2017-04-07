@@ -120,7 +120,7 @@ $(BUILDDIR)%.elf: $(OBJS)
 	$(OBJCOPY) -O ihex -S $< $@
 
 %.lst: %.elf
-	$(OBJDUMP) -D $< > $@
+	$(OBJDUMP) -d $< > $@
 
 .PHONY: print_size
 print_size: $(BIN_NAME).elf
